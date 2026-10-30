@@ -31,3 +31,27 @@ body { background: var(--bg); color: var(--fg); font-family: "Inter Variable", I
 .nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; font-weight: 600; color: var(--fg); }
 .nav-link:hover { background: var(--panel); }
 .nav-link[aria-current="page"] { background: var(--brand); color: #fff; }
+
+/* ---- Token tambahan dari Figma (modal, tombol "push", kartu statistik) ---- */
+:root { --btn: #684a91; --btn-edge: #30205f; --pink: #fbe4ef; --pink-text: #a0376b; --cream: #fffdf7; --soft: #f7f3e8; }
+.eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.btn-push { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px 22px; border-radius: 18px;
+  background: var(--btn); color: #fff; font-weight: 700; border: 0; border-bottom: 4px solid var(--btn-edge); cursor: pointer; }
+.btn-push:hover { filter: brightness(1.06); }
+.btn-push:disabled { opacity: .5; cursor: not-allowed; }
+.btn-pink { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 18px; border-radius: 12px;
+  background: var(--pink); color: var(--pink-text); font-weight: 700; border: 0; cursor: pointer; }
+.btn-white { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 18px; border-radius: 12px;
+  background: #fff; color: var(--brand); font-weight: 700; border: 0; cursor: pointer; }
+.btn-white:disabled, .btn-pink:disabled { opacity: .5; cursor: not-allowed; }
+.stat-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; box-shadow: 0 4px 14px rgba(53, 16, 128, .07);
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.stat-card .num { font-size: 36px; font-weight: 700; line-height: 1.1; color: var(--fg); }
+.stat-icon { display: flex; height: 40px; width: 40px; align-items: center; justify-content: center; border-radius: 999px; background: var(--brand); color: #fff; flex: none; }
+.field { width: 100%; padding: 12px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; color: var(--fg); font-weight: 500; }
+.field:focus { outline: 2px solid var(--brand-soft); border-color: var(--brand); }
+.page-wrap { min-height: 100vh; background: linear-gradient(180deg, #fffef6, #fff8df); }
+.toggle { position: relative; height: 26px; width: 46px; border-radius: 999px; background: #cfc6e4; border: 0; cursor: pointer; transition: background .15s; flex: none; }
+.toggle[aria-checked="true"] { background: var(--btn); }
+.toggle::after { content: ""; position: absolute; top: 3px; left: 3px; height: 20px; width: 20px; border-radius: 999px; background: #fff; transition: transform .15s; }
+.toggle[aria-checked="true"]::after { transform: translateX(20px); }

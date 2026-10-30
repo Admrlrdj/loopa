@@ -1,3 +1,4 @@
+import { supabase } from "@/lib/supabase";
 import type * as T from "@/types/api";
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
@@ -7,10 +8,16 @@ export class ApiError extends Error {
   constructor(message: string, public status: number) { super(message); }
 }
 
+async function authHeader(): Promise<Record<string, string>> {
+  if (!supabase) return {};
+  const { data } = await supabase.auth.getSession();
+  return data.session ? { Authorization: `Bearer ${data.session.access_token}` } : {};
+}
+
 async function req<R>(path: string, init?: RequestInit): Promise<R> {
   const res = await fetch(`${API_URL}${path}`, {
     ...init,
-    headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) },
+    headers: { "Content-Type": "application/json", ...(await authHeader()), ...(init?.headers ?? {}) },
   });
   if (!res.ok) {
     let detail: unknown = res.statusText;
@@ -22,12 +29,19 @@ async function req<R>(path: string, init?: RequestInit): Promise<R> {
 const post = <R>(path: string, body?: unknown) =>
   req<R>(path, { method: "POST", body: body === undefined ? undefined : JSON.stringify(body) });
 
+export interface SessionSetup { study: number; brk: number; title: string; mandatoryBreak: boolean; soundtrack: string | null }
+
 export const api = {
-  health: () => req<{ status: string; inference_backend: string; persistence: boolean; llm?: { enabled: boolean; model: string; fallbacks: string[] } }>("/health"),
-  createSession: (study: number, brk: number) =>
-    post<T.SessionOut>("/sessions", { configured_study_seconds: study, configured_break_seconds: brk }),
+  health: () => req<T.HealthOut>("/health"),
+  me: () => req<T.MeOut>("/me"),
+  createSession: (c: SessionSetup) =>
+    post<T.SessionOut>("/sessions", {
+      configured_study_seconds: c.study, configured_break_seconds: c.brk, title: c.title,
+      mandatory_break: c.mandatoryBreak, soundtrack: c.soundtrack,
+    }),
   startBlock: (sid: string) => post<T.BlockOut>(`/sessions/${sid}/blocks`),
   completeBlock: (sid: string, bid: string) => post(`/sessions/${sid}/blocks/${bid}/complete`),
+  pauseBlock: (sid: string, bid: string) => post(`/sessions/${sid}/blocks/${bid}/pause`),
   resumeBlock: (sid: string, bid: string) => post(`/sessions/${sid}/blocks/${bid}/resume`),
   startBreak: (sid: string) => post<T.BreakOut>(`/sessions/${sid}/breaks`),
   completeBreak: (sid: string, brid: string) => post(`/sessions/${sid}/breaks/${brid}/complete`),
@@ -39,5 +53,7 @@ export const api = {
   summary: (sid: string) => req<T.SummaryOut>(`/sessions/${sid}/summary`),
   insights: (sid: string) => post<T.InsightOut>(`/sessions/${sid}/insights`),
   breakTip: (sid: string) => post<T.InsightOut>(`/sessions/${sid}/break-tip`),
+  reflection: (sid: string, mood: T.Mood) => post(`/sessions/${sid}/reflection`, { mood }),
   list: (limit = 20) => req<T.SessionListOut>(`/sessions?limit=${limit}`),
+  stats: (days = 14) => req<T.StatsOut>(`/stats?days=${days}`),
 };

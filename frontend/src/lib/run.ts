@@ -11,6 +11,11 @@ export interface Run {
   breakId?: string;
   breakStartedAt?: number;
   soundOn: boolean;
+  title?: string;
+  mandatoryBreak?: boolean;
+  soundtrack?: string | null;
+  musicOn?: boolean;
+  noCamera?: boolean; // dipilih "Start without camera": timer saja
 }
 const KEY = "sss_run";
 
