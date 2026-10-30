@@ -13,3 +13,13 @@ logs/*
 _legacy/
 *.pdf
 .pytest_cache/
+
+models/runs/
+models/eval_runs/
+models/pretrained/
+metadata/synthetic_*
+metadata/replay_synthetic_*
+metadata/video/
+metadata/check_sample.jpg
+metadata/eval_plots/
+.vercel

@@ -4,6 +4,8 @@ Pomodoro kustom + deteksi indikasi kantuk via webcam (YOLO fine-tuned pada kantu
 Spesifikasi: `docs/SMART_STUDY_ASSISTANT_PRD_v1.md` dan `docs/SMART_STUDY_ASSISTANT_Project_Brief_v2.md`.
 Hasil deteksi hanyalah indikasi visual, bukan diagnosis; Loopa tidak mengukur fokus/konsentrasi (di luar PRD).
 
+Setup akun (Supabase, Google, deploy GitHub): [`docs/SETUP_AUTH_SUPABASE.md`](docs/SETUP_AUTH_SUPABASE.md) · dataset webcam laptop: [`docs/DATASET_LAPTOPCAM.md`](docs/DATASET_LAPTOPCAM.md).
+
 Daftar tugas (sudah/belum) dan panduan kalibrasi, NO_FACE, suara, break, serta UAT/demo: [`docs/TASKLIST.md`](docs/TASKLIST.md).
 
 ## Alamat produksi

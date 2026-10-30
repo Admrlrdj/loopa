@@ -56,4 +56,5 @@ export const api = {
   reflection: (sid: string, mood: T.Mood) => post(`/sessions/${sid}/reflection`, { mood }),
   list: (limit = 20) => req<T.SessionListOut>(`/sessions?limit=${limit}`),
   stats: (days = 14) => req<T.StatsOut>(`/stats?days=${days}`),
+  detect: (imageB64: string, imgsz = 640) => post<{ detections: T.Detection[] }>("/detect", { image_b64: imageB64, imgsz }),
 };

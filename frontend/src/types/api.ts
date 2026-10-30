@@ -39,3 +39,5 @@ export interface HealthOut {
   auth?: { enabled: boolean; required: boolean };
   llm?: { enabled: boolean; model: string; fallbacks: string[] };
 }
+
+export interface Detection { label: string; confidence: number; bbox?: number[] | null }

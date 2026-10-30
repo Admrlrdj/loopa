@@ -23,6 +23,9 @@ def main() -> None:
     ap.add_argument("--name", default="kantukv2_yolo")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--fraction", type=float, default=1.0, help="pakai sebagian data train (uji cepat di CPU)")
+    ap.add_argument("--strong-aug", action="store_true", help="augmentasi kuat untuk pergeseran domain (kamera mobil -> webcam laptop)")
+    ap.add_argument("--lr0", type=float, default=None, help="learning rate awal; pakai kecil (mis. 0.002) saat fine-tune dari best.pt")
+    ap.add_argument("--freeze", type=int, default=0, help="bekukan N layer pertama (backbone) saat fine-tune dengan data sedikit")
     a = ap.parse_args()
 
     import ultralytics
@@ -30,10 +33,18 @@ def main() -> None:
 
     models_dir = Path("models").resolve()
     model = YOLO(a.model)
+    extra: dict = {}
+    if a.strong_aug:  # cahaya, jarak, posisi kepala, dan latar webcam berbeda dari kamera dashboard
+        extra.update(hsv_h=0.02, hsv_s=0.7, hsv_v=0.5, degrees=8, translate=0.15, scale=0.6, mosaic=1.0, mixup=0.1, erasing=0.3)
+    if a.lr0 is not None:
+        extra["lr0"] = a.lr0
+    if a.freeze:
+        extra["freeze"] = a.freeze
     res = model.train(
         data=str(a.data.resolve()), epochs=a.epochs, imgsz=a.imgsz, batch=a.batch, device=a.device or None,
         patience=a.patience, fraction=a.fraction, project=str(models_dir / "runs"), name=a.name, seed=a.seed, exist_ok=True,
         fliplr=0.5, flipud=0.0,  # flip horizontal aman; vertikal merusak orientasi kepala
+        **extra,
     )
     best = Path(res.save_dir) / "weights" / "best.pt"
     shutil.copy2(best, models_dir / "best.pt")

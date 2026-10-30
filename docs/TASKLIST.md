@@ -5,6 +5,16 @@ Terakhir diperbarui: 30 Oktober 2026. Target MVP: 13 November 2026.
 
 Legenda: ✅ sudah dan diuji · 🟡 ada tetapi belum diuji penuh / masih sementara · ⬜ belum dikerjakan
 
+## Pembaruan terbaru (30 Okt, sore)
+
+- ✅ **Supabase:** proyek `loopa` dibuat, skema + RLS dijalankan, Site URL/Redirect URLs diatur (lihat `docs/SETUP_AUTH_SUPABASE.md`). ⬜ Masih perlu: aktifkan provider Google (Client ID/secret dari Anda), isi `SUPABASE_SERVICE_KEY` di Railway, dan env `NEXT_PUBLIC_SUPABASE_*` di Vercel.
+- ✅ **Auth (kode):** login Google/email via Supabase, verifikasi JWT di backend, sesi/riwayat/statistik per pengguna, profil (username/avatar) di `/profile`. 🟡 Belum diuji dengan akun Google sungguhan (menunggu provider Google).
+- ✅ **UI mengikuti Figma:** Start Session + izin kamera, Focus Session (ring timer, Pause, panel musik), modal saran, **Mandatory Break**, **Session Wrap** (refleksi Good/Okay/Tough), History (tabel), Statistics (grafik, streak, insight), Login.
+- ✅ **Musik latar** generatif (4 soundtrack; sedikit lebih cerah saat ada indikasi kantuk; volume turun saat alert).
+- ✅ **Alat dataset webcam laptop:** `/collect`, `scripts/prepare_laptopcam.py`, opsi `--strong-aug` (lihat `docs/DATASET_LAPTOPCAM.md`). ⬜ Data webcam belum direkam; model belum dilatih ulang.
+- ✅ **Hosting dari GitHub** (`Admrlrdj/loopa`): lihat bagian 3 di `docs/SETUP_AUTH_SUPABASE.md`.
+- ✅ Backend 50 tes lulus.
+
 Alamat produksi: web https://loopa-smart-study.vercel.app · backend https://loopa-backend-production-44f3.up.railway.app
 
 ---
