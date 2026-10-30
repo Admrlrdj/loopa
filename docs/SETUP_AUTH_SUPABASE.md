@@ -35,7 +35,7 @@ Cek hasilnya: `GET /health` harus menampilkan `"persistence": true` dan `"auth":
 
 **Vercel** (`loopa-smart-study`): Settings → Git → *Connect Git Repository* → `Admrlrdj/loopa`; Settings → General → **Root Directory `frontend`**, Framework Next.js.
 
-Setelah terhubung, setiap `git push` ke `main` men-deploy keduanya. Catatan: state sesi aktif ada di memori backend, jadi tiap deploy me-reset sesi yang sedang berjalan.
+**Status: keduanya sudah terhubung ke `Admrlrdj/loopa` (Railway Root Directory `/backend`, Vercel Root Directory `frontend`).** Setiap `git push` ke `main` men-deploy keduanya; jangan lagi memakai `vercel deploy` dari folder `frontend`. Catatan: state sesi aktif ada di memori backend, jadi tiap deploy me-reset sesi yang sedang berjalan.
 
 ## 4. Perilaku akun
 
