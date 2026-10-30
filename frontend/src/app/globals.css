@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* Token dari Figma "loopa" (design system hifi): ungu #351080, teks #30205F, lavender #D4C4FF/#F0E8FF, kuning #FFF34A */
+:root {
+  --bg: #ffffff;
+  --panel: #f0e8ff;
+  --fg: #30205f;
+  --muted: #6b6489;
+  --card: #ffffff;
+  --line: #e1d8f5;
+  --brand: #351080;
+  --brand-soft: #d4c4ff;
+  --accent: #fff34a;
+  --danger: #b4234f;
+}
+body { background: var(--bg); color: var(--fg); font-family: "Inter Variable", Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 20px; }
+.card-soft { background: var(--panel); border-radius: 20px; padding: 16px; }
+.card-brand { background: var(--brand); color: #fff; border-radius: 28px; padding: 28px; }
+.card-accent { background: var(--accent); color: var(--fg); border-radius: 28px; padding: 28px; }
+.muted { color: var(--muted); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 999px;
+  font-weight: 600; border: 1.5px solid var(--brand); background: #fff; color: var(--brand); cursor: pointer; }
+.btn:hover { filter: brightness(0.96); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary { background: var(--brand); color: #fff; }
+.btn-accent { background: var(--accent); color: var(--brand); border-color: var(--fg); }
+.btn-danger { background: var(--danger); color: #fff; border-color: transparent; }
+.input { width: 100%; padding: 12px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; color: var(--fg); }
+.input:focus { outline: 2px solid var(--brand-soft); border-color: var(--brand); }
+.nav-link { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-radius: 999px; font-weight: 600; color: var(--fg); }
+.nav-link:hover { background: var(--panel); }
+.nav-link[aria-current="page"] { background: var(--brand); color: #fff; }

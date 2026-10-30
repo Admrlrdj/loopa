@@ -1,0 +1,44 @@
+{
+  "video": "metadata\\synthetic_test.mp4",
+  "params": {
+    "sample_fps": 2.0,
+    "imgsz": 320,
+    "yolo_conf": 0.25,
+    "eye_closure_seconds": 1.5,
+    "alert1_confirm_seconds": 3.0,
+    "alert2_recheck_seconds": 5.0,
+    "alert_cooldown_seconds": 30.0,
+    "min_conf": 0.4
+  },
+  "summary": {
+    "blinks": 2,
+    "yawns": 0,
+    "eye_closures": 1,
+    "drowsy_seconds": 6.5,
+    "alerts": [
+      {
+        "t": 14.0,
+        "level": 1
+      }
+    ],
+    "no_face_frames": 9,
+    "frames": 68
+  },
+  "vs_truth": {
+    "blinks": {
+      "truth": 0,
+      "pipeline": 2,
+      "diff": 2
+    },
+    "yawns": {
+      "truth": 0,
+      "pipeline": 0,
+      "diff": 0
+    },
+    "eye_closures": {
+      "truth": 1,
+      "pipeline": 1,
+      "diff": 0
+    }
+  }
+}

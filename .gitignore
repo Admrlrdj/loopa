@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.local
+node_modules/
+.next/
+models/*.pt
+datasets/*
+!datasets/.gitkeep
+logs/*
+!logs/.gitkeep
+_legacy/
+*.pdf
+.pytest_cache/

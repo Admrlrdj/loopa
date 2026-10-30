@@ -1,0 +1,2 @@
+# Dependensi backend (FastAPI). Untuk model YOLO tambahkan: pip install -r backend/requirements-ml.txt
+-r backend/requirements.txt
